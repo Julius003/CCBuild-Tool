@@ -12,19 +12,19 @@ ccbuild ./myMainFile.cpp -o outputName
 
 ## How it works
 The tool opens the main c++ file and looks 
-for ```#include "myHeader.h"``` statements. It supports
+for `#include "myHeader.h"` statements. It supports
 header files with these extensions:
-[ .h  .hh  .hpp ].
+` .h  .hh  .hpp `.
 When it has found a header file, it repeats the process recursively until 
 all included files are found.
 Then is begins a search and tries to find the right source files.
 The tool does this by matching the header file name against variations
 of it with the following extensions:
-[ .cpp  .cc  .C  .cxx  .cppm ]
+` .cpp  .cc  .C  .cxx  .cppm `
 When it has found the source files, it executes the standard g++
 build command with the appropirate arguments.
 
-## Instalation
+## Installation
 
 Make sure you have g++ installed.
 
