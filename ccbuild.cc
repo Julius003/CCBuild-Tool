@@ -82,6 +82,7 @@ std::string findSourceFile(std::string headerFileName){
 int main(int argc, char** argv){
     std::string fileName;
     std::string outputName = "a.out";
+    std::vector<std::string> additionalArguments;
     std::vector<std::string> existingDependencyFiles; // The dependencies that will have to be in the compile command
 
     if(argc < 2){
@@ -92,8 +93,12 @@ int main(int argc, char** argv){
     fileName = argv[1];
 
     for(int i = 0; i < argc; ++i){
-        if(strcmp(argv[i], "-o") == 0){
+        std::string current_argument = argv[i];
+        if(current_argument == "-o"){
             outputName = argv[i+1];
+        }
+        if(current_argument.find("-std=") != std::string::npos){
+            additionalArguments.push_back(current_argument);
         }
     }
 
@@ -111,6 +116,9 @@ int main(int argc, char** argv){
         command += " " + dependency;
     }
     command += " -o " + outputName;
+    for(auto arg: additionalArguments){
+        command += " " + arg;
+    }
 
     system(command.c_str());
 }
